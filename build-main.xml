@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<project name="demo" default="main"  >
+	    
+	<property name="tomcat-folder" value="C:\Users\sok.kimchhoin\Desktop\SVN  + Build-main + Jenkin\apache-tomcat-7.0.72\webapps" />
+	<property name="source-folder" value="disk" />
+	<property name="source-war-pattern" value="*/war/*.war" />
+	
+	<!-- include library -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="lib/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
+	    
+	<target name="main">
+		<echo>=================================================</echo>
+		<echo>Copying Test War file to Tomcat folder</echo>
+		<echo>=================================================</echo>
+		<!-- find war files -->
+		<path id="war.path">
+			<fileset dir="${source-folder}">
+				<include name="${source-war-pattern}" />
+			</fileset>
+		</path>
+		
+		<!-- use lib/ant-contrib -->
+		<timestampselector property="latest.modified" pathref="war.path" />
+		<property name="warFile" value="${latest.modified}" />
+		<dirname property="warFolder" file="${latest.modified}" />
+		
+		<!-- <copy file="${warFile}" tofile="${tomcat-folder}"/> -->
+		<copy todir="${tomcat-folder}" overwrite="true">
+			<fileset dir="${warFolder}"/>
+		</copy>
+		
+		<echo>=================================================</echo>
+		<echo>Delete and unwar</echo>
+		<echo>=================================================</echo>
+		<basename property="project-folder" file="${warFile}" suffix=".war" />
+		<delete dir="${tomcat-folder}/${project-folder}"/>
+		<unwar dest="${tomcat-folder}/${project-folder}" src="${warFile}" />  
+	</target>
+</project>
