@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 	<project name="demo" default="main"  >
 	    
-	<property name="tomcat-folder" value="C:\Users\sok.kimchhoin\Desktop\SVN  + Build-main + Jenkin\apache-tomcat-7.0.72\webapps" />
+	<property name="tomcat-folder" value="C:\Users\sok.kimchhoin\Desktop\git_jenkin\apache-tomcat-7.0.72\webapps" />
 	<property name="source-folder" value="disk" />
 	<property name="source-war-pattern" value="*/war/*.war" />
 	
